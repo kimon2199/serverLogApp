@@ -4,18 +4,18 @@ import InsertionCard from './components/insertionCard';
 
 function App() {
 
-  const [type, setType] = useState('BM')
-  const [host, setHost] = useState('')
-  const [hostname, setHostname] = useState('')
-  const [os, setOs] = useState('')
-  const [ip, setIp] = useState('')
-  const [disk, setDisk] = useState('')
-  const [datastore, setDatastore] = useState('')
-  const [ram, setRam] = useState('')
-  const [cores, setCores] = useState('')
-  const [vlan, setVlan] = useState('')
-  const [sw, setSw] = useState('')
-  const [physPort, setPhysPort] = useState('')
+  const [type, setType] = useState(['BM'])
+  const [host, setHost] = useState([''])
+  const [hostname, setHostname] = useState([''])
+  const [os, setOs] = useState([''])
+  const [ip, setIp] = useState([''])
+  const [disk, setDisk] = useState([''])
+  const [datastore, setDatastore] = useState([''])
+  const [ram, setRam] = useState([''])
+  const [cores, setCores] = useState([''])
+  const [vlan, setVlan] = useState([''])
+  const [sw, setSw] = useState([''])
+  const [physPort, setPhysPort] = useState([''])
 
   // useEffect(()=>{
   //   fetch('http://localhost:3001/api/get', {
@@ -28,32 +28,45 @@ function App() {
   // })
 
   const submitLog = () => {
-    fetch('http://localhost:3001/api/insert', {
-            method: 'post', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({  type: type,
-                                    host: host,
-                                    hostname: hostname,
-                                    os: os,
-                                    ip: ip,
-                                    disk: disk,
-                                    datastore: datastore,
-                                    ram: ram,
-                                    cores: cores,
-                                    vlan: vlan,
-                                    sw: sw,
-                                    physPort: physPort
-        })
-        })
-        .then(response => response.json())
-        .then((data) => {console.log(data)})
-        
+    for (let index = 0; index < host.length; index++) {
+      fetch('http://localhost:3001/api/insert', {
+              method: 'post', 
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({  type: type[index],
+                                      host: host[index],
+                                      hostname: hostname[index],
+                                      os: os[index],
+                                      ip: ip[index],
+                                      disk: disk[index],
+                                      datastore: datastore[index],
+                                      ram: ram[index],
+                                      cores: cores[index],
+                                      vlan: vlan[index],
+                                      sw: sw[index],
+                                      physPort: physPort[index]
+          })
+          })
+          .then(response => response.json())
+          .then((data) => {console.log(data)})
+    }
   }
 
   const [cards,setCards] = useState([1])
 
   const addCard = () => {
     setCards(cards => [...cards, 1]);
+    setType(type => [...type,'BM']);
+    setHost(host => [...host,'']);;
+    setHostname(hostname => [...hostname,'']);;
+    setOs(os => [...os,'']);;
+    setIp(ip => [...ip,'']);;
+    setDisk(disk => [...disk,'']);;
+    setDatastore(datastore => [...datastore,'']);;
+    setRam(ram => [...ram,'']);;
+    setCores(cores => [...cores,'']);;
+    setVlan(vlan => [...vlan,'']);;
+    setSw(sw => [...sw,'']);;
+    setPhysPort(physPort => [...physPort,'']);;
   }
   
   const delCard = () => {
@@ -62,20 +75,19 @@ function App() {
     }
   }
 
-
   let cardList = cards.map((item,index)=>{
-
-    return <InsertionCard key={"cd-"+index} setType={setType} setHost={setHost} setHostname={setHostname}
-    setOs={setOs} setIp={setIp} setDisk={setDisk} setDatastore={setDatastore} setRam={setRam}
-    setCores={setCores} setVlan={setVlan} setSw={setSw} setPhysPort={setPhysPort}/>
-  
+    return <InsertionCard key={"cd-"+index} index={index} setType={setType} type={type} setHost={setHost} 
+    host={host} setHostname={setHostname} hostname={hostname} setOs={setOs} os={os} setIp={setIp} 
+    ip={ip} setDisk={setDisk} disk={disk} setDatastore={setDatastore} datastore={datastore} 
+    setRam={setRam} ram={ram} setCores={setCores} cores={cores} setVlan={setVlan} vlan={vlan} 
+    setSw={setSw} sw={sw} setPhysPort={setPhysPort} physPort={physPort}/>
   })
 
   return (
-    <div className="App">
+    <div className="App" key="6">
       <h5 className="card-title mt-5 mb-5">Server Management Web App</h5>
       <h5 className="card-title mt-5 mb-5">to be {cards.length}</h5>
-      <div className="container mb-5">
+      <div className="container mb-5" key="6">
 
         {cardList}
         {/* <div className="row mb-3 mt-5">
