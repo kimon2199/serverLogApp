@@ -61,7 +61,7 @@ function PastLogCard(props) {
               </div>
               <div className="col-2">
                 <label className="form-label">SW</label>
-                <input type="text" className="form-control" id="exampleFormControlInput11" placeholder={props.vlan}/>
+                <input type="text" className="form-control" id="exampleFormControlInput11" placeholder={props.sw}/>
               </div>
               <div className="col-2">
                 <label className="form-label">Physical Port</label>
