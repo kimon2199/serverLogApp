@@ -19,16 +19,6 @@ function InsertPage() {
   const [sw, setSw] = useState([''])
   const [physPort, setPhysPort] = useState([''])
 
-  // useEffect(()=>{
-  //   fetch('http://localhost:3001/api/get', {
-  //               method: 'get'
-  //           })
-  //               .then(res => res.json())
-  //               .then((data) => {
-  //                  console.log(data);
-  //               })
-  // })
-
   const submitLog = () => {
     for (let index = 0; index < host.length; index++) {
       fetch('http://localhost:3001/api/insert', {

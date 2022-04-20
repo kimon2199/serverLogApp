@@ -14,10 +14,10 @@ function Navbar() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                <a className="nav-link active" aria-current="page">Home</a>
+                    <Link className="nav-link" to="/">Insert</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/logs">Blogs</Link>
+                    <Link className="nav-link" to="/logs">Past Logs</Link>
                 </li>
                 <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle"   id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
