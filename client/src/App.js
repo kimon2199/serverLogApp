@@ -84,10 +84,11 @@ function App() {
   })
 
   return (
-    <div className="App" key="6">
-      <h5 className="card-title mt-5 mb-5">Server Management Web App</h5>
-      <h5 className="card-title mt-5 mb-5">to be {cards.length}</h5>
-      <div className="container mb-5" key="6">
+    <div className="App background" key="6">
+      <div className='pt-5'/>
+      <h5 className="card-title  mb-5 white-font">Server Management Web App</h5>
+      <h5 className="card-title mt-5 mb-5 white-font">to be {cards.length}</h5>
+      <div className="container">
 
         {cardList}
         {/* <div className="row mb-3 mt-5">
@@ -159,11 +160,12 @@ function App() {
             <span type="button" className="badge bg-danger" onClick={()=>{delCard()}}>-</span>
           </div>
         </div>
-        <div className='row mb-5'>
+        <div className='row'>
           <div className='col'>
             <button type="button" className="btn btn-primary" onClick={()=>{submitLog()}}>Submit</button>
           </div>
         </div>
+        <div className='pb-5'/>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import '../App.css';
+
 function InsertionCard(props) {
 
     const changeSpecificValue = (set,arr,index,changedValue) => {
@@ -5,8 +7,8 @@ function InsertionCard(props) {
     }
 
     return (
-        <div className="row mb-3 mt-5">
-          <div className="card">
+        <div className="row mb-3 mt-5 bg">
+          <div className="glass0 white-font">
             <div className="row mb-3 mt-3">
               <div className="col-2">
                 <label className="form-label">Server Type</label>
