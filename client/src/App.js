@@ -51,10 +51,7 @@ function App() {
     }
   }
 
-  const [cards,setCards] = useState([1])
-
   const addCard = () => {
-    setCards(cards => [...cards, 1]);
     setType(type => [...type,'BM']);
     setHost(host => [...host,'']);;
     setHostname(hostname => [...hostname,'']);;
@@ -70,12 +67,23 @@ function App() {
   }
   
   const delCard = () => {
-    if (cards.length > 1) {
-      setCards(cards => cards.slice(0,cards.length-1));
+    if (type.length > 1) {
+      setType(type => type.slice(0,type.length-1));
+      setHost(host => host.slice(0,host.length-1));;
+      setHostname(hostname => hostname.slice(0,hostname.length-1));;
+      setOs(os => os.slice(0,os.length-1));;
+      setIp(ip => ip.slice(0,ip.length-1));;
+      setDisk(disk => disk.slice(0,disk.length-1));;
+      setDatastore(datastore => datastore.slice(0,datastore.length-1));;
+      setRam(ram => ram.slice(0,ram.length-1));;
+      setCores(cores => cores.slice(0,cores.length-1));;
+      setVlan(vlan => vlan.slice(0,vlan.length-1));;
+      setSw(sw => sw.slice(0,sw.length-1));;
+      setPhysPort(physPort => physPort.slice(0,physPort.length-1));;
     }
   }
 
-  let cardList = cards.map((item,index)=>{
+  let cardList = type.map((item,index)=>{
     return <InsertionCard key={"cd-"+index} index={index} setType={setType} type={type} setHost={setHost} 
     host={host} setHostname={setHostname} hostname={hostname} setOs={setOs} os={os} setIp={setIp} 
     ip={ip} setDisk={setDisk} disk={disk} setDatastore={setDatastore} datastore={datastore} 
@@ -84,80 +92,20 @@ function App() {
   })
 
   return (
-    <div className="App background" key="6">
+    <div className="App background">
       <div className='pt-5'/>
       <h5 className="card-title  mb-5 white-font">Server Management Web App</h5>
-      <h5 className="card-title mt-5 mb-5 white-font">to be {cards.length}</h5>
+      <h5 className="card-title mt-5 mb-5 white-font">to be {type.length}</h5>
       <div className="container">
 
-        {cardList}
-        {/* <div className="row mb-3 mt-5">
-          <div className="card">
-            <div className="row mb-3 mt-3">
-              <div className="col-2">
-                <label className="form-label">Server Type</label>
-                <select className="form-select" defaultValue="BM">
-                  <option onClick={()=>{setType('BM')}} value="BM">BM</option>
-                  <option onClick={()=>{setType('VM')}} value="VM">VM</option>
-                  <option onClick={()=>{setType('APP')}} value="APP">APP</option>
-                </select>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Host</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Host" onChange={(e)=>{setHost(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Hostname</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Hostname" onChange={(e)=>{setHostname(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">OS</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="OS" onChange={(e)=>{setOs(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">IP</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="IP" onChange={(e)=>{setIp(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Disk</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Disk" onChange={(e)=>{setDisk(e.target.value)}}/>
-              </div>
-            </div>
-            <div className="row mb-5">
-              <div className="col-2">
-                <label className="form-label">Datastore</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Datastore" onChange={(e)=>{setDatastore(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">RAM</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="RAM" onChange={(e)=>{setRam(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Cores</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Cores" onChange={(e)=>{setCores(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">VLAN</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="VLAN" onChange={(e)=>{setVlan(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">SW</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="SW" onChange={(e)=>{setSw(e.target.value)}}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Physical Port</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Physical Port" onChange={(e)=>{setPhysPort(e.target.value)}}/>
-              </div>
-            </div>
-          </div>
-        </div> */}
+        {cardList} 
 
         <div className='row mb-5'>
           <div className='col-1'>
-            <span type="button" className="badge bg-success" onClick={()=>{addCard()}}>+</span>
+            <span type="button" className="badge glass0" onClick={()=>{addCard()}}>+</span>
           </div>
           <div className='col-1'>
-            <span type="button" className="badge bg-danger" onClick={()=>{delCard()}}>-</span>
+            {(type.length > 1) && (<span type="button" className="badge glass0" onClick={()=>{delCard()}}>-</span>)}
           </div>
         </div>
         <div className='row'>
