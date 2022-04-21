@@ -45,17 +45,18 @@ function InsertPage() {
 
   const addCard = () => {
     setType(type => [...type,'BM']);
-    setHost(host => [...host,'']);;
-    setHostname(hostname => [...hostname,'']);;
-    setOs(os => [...os,'']);;
-    setIp(ip => [...ip,'']);;
-    setDisk(disk => [...disk,'']);;
-    setDatastore(datastore => [...datastore,'']);;
-    setRam(ram => [...ram,'']);;
-    setCores(cores => [...cores,'']);;
-    setVlan(vlan => [...vlan,'']);;
-    setSw(sw => [...sw,'']);;
-    setPhysPort(physPort => [...physPort,'']);;
+    setHost(host => [...host,'']);
+    setHostname(hostname => [...hostname,'']);
+    setOs(os => [...os,'']);
+    setIp(ip => [...ip,'']);
+    setDisk(disk => [...disk,'']);
+    setDatastore(datastore => [...datastore,'']);
+    setRam(ram => [...ram,'']);
+    setCores(cores => [...cores,'']);
+    setVlan(vlan => [...vlan,'']);
+    setSw(sw => [...sw,'']);
+    setPhysPort(physPort => [...physPort,'']);
+    console.log(99);
   }
   
   const delCard = () => {

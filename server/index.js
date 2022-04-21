@@ -48,7 +48,14 @@ app.post('/api/insert', (req,res)=>{
 app.get('/api/get', (req,res)=>{
     const sqlSelect = "SELECT * FROM server_logs";
     db.query(sqlSelect, (err, result)=>{
-        res.send(result)
+        res.send(result);
+    });
+})
+
+app.delete('/api/delete/:id', (req,res) => {
+    const sqlDelete = "DELETE FROM server_logs WHERE id=" + req.params.id;
+    db.query(sqlDelete, (err, result)=>{
+        res.send(result);
     });
 })
 

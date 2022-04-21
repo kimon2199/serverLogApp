@@ -4,44 +4,57 @@ import { FiEdit2 } from 'react-icons/fi';
 
 function PastLogCard(props) {
 
+    const delPopUp = () => {
+      props.setDelModalShow(true);
+      props.setCardSpotlight(props.my_id);
+      console.log(6);
+    }
+
+    const editPopUp = () => {
+      //props.setModalShow(true);
+      console.log(6);
+    }
+
     return (
-        <div className="row mb-3 mt-5 bg">
-          <div className="glass0 white-font">
-          <fieldset disabled>
-            <div className="row mb-1 mt-1">
-              <div className="col-11">
-              <div className="row">
-              <div className="col-2">
-                <label className="form-label">Server Type</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder={props.type}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Host</label>
-                <input type="text" className="form-control" id="exampleFormControlInput2" placeholder={props.host}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Hostname</label>
-                <input type="text" className="form-control" id="exampleFormControlInput3" placeholder={props.hostname}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">OS</label>
-                <input type="text" className="form-control" id="exampleFormControlInput4" placeholder={props.os}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">IP</label>
-                <input type="text" className="form-control" id="exampleFormControlInput5" placeholder={props.ip}/>
-              </div>
-              <div className="col-2">
-                <label className="form-label">Disk</label>
-                <input type="text" className="form-control" id="exampleFormControlInput6" placeholder={props.disk}/>
-              </div>
-              </div>
-              </div>
-              <div className="col-1">
-                <div><span type="button" className="badge glass0" onClick={()=>{}}><AiOutlineDelete/></span></div>
-                <div><span type="button" className="badge glass0" onClick={()=>{}}><FiEdit2/></span></div>
-              </div>
+      <div className="row mb-3 mt-5 bg">
+        <div className="glass0 white-font">
+          <div className="row mb-1 mt-1">
+            <div className="col-11">
+              <fieldset disabled>
+                <div className="row">
+                  <div className="col-2">
+                    <label className="form-label">Server Type</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder={props.type}/>
+                  </div>
+                  <div className="col-2">
+                    <label className="form-label">Host</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput2" placeholder={props.host}/>
+                  </div>
+                  <div className="col-2">
+                    <label className="form-label">Hostname</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput3" placeholder={props.hostname}/>
+                  </div>
+                  <div className="col-2">
+                    <label className="form-label">OS</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput4" placeholder={props.os}/>
+                  </div>
+                  <div className="col-2">
+                    <label className="form-label">IP</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput5" placeholder={props.ip}/>
+                  </div>
+                  <div className="col-2">
+                    <label className="form-label">Disk</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput6" placeholder={props.disk}/>
+                  </div>
+                </div>
+              </fieldset>
             </div>
+            <div className="col-1">
+              <div><span type="button" className="badge glass0" onClick={()=> delPopUp()}><AiOutlineDelete/></span></div>
+              <div><span type="button" className="badge glass0" onClick={()=> editPopUp() }><FiEdit2/></span></div>
+            </div>
+          </div>
+          <fieldset disabled>
             <div className="row mb-3">
               <div className="col-2">
                 <label className="form-label">Datastore</label>
@@ -69,8 +82,8 @@ function PastLogCard(props) {
               </div>
             </div>
           </fieldset>
-          </div>
         </div>
+      </div>
     );
 }
 
