@@ -30,7 +30,7 @@ function ConfirmDelModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Are you sure you want to delete? {props.card}
+                    Are you sure you want to delete?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className="mybtn" variant="outline-warning" onClick={props.onHide}>Cancel</Button>

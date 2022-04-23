@@ -59,6 +59,29 @@ app.delete('/api/delete/:id', (req,res) => {
     });
 })
 
+app.put('/api/edit/:id', (req,res) => {
+    const type = req.body.type;
+    const host = req.body.host;
+    const hostname = req.body.hostname;
+    const os = req.body.os;
+    const ip = req.body.ip;
+    const disk = req.body.disk;
+    const datastore = req.body.datastore;
+    const ram = req.body.ram;
+    const cores = req.body.cores;
+    const vlan = req.body.vlan;
+    const sw = req.body.sw;
+    const physPort = req.body.physPort;
+
+    const sqlUpdate = "UPDATE server_logs \
+    SET server_type = ?, host = ?, hostname= ?, os = ?, ip = ?, disk = ?,\
+    datastore = ?, ram = ?, cores = ?, vlan= ?, sw = ?, physical_port = ?\
+    WHERE id=" + req.params.id;
+    db.query(sqlUpdate, [type,host,hostname,os,ip,disk,datastore,ram,cores,vlan,sw,physPort], (err, result)=>{
+        res.send(result);
+    });
+})
+
 app.listen(3001, () =>{
     console.log('runnig on port 3001');
 });

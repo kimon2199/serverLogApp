@@ -6,13 +6,13 @@ function PastLogCard(props) {
 
     const delPopUp = () => {
       props.setDelModalShow(true);
-      props.setCardSpotlight(props.my_id);
-      console.log(6);
+      props.setCardSpotlight(props.row.id);
     }
 
     const editPopUp = () => {
-      //props.setModalShow(true);
-      console.log(6);
+      props.setEditModalShow(true);
+      props.setCardSpotlight(props.row.id);
+      props.setWholeCard(props.row);
     }
 
     return (
@@ -24,61 +24,61 @@ function PastLogCard(props) {
                 <div className="row">
                   <div className="col-2">
                     <label className="form-label">Server Type</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder={props.type}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder={props.row.server_type}/>
                   </div>
                   <div className="col-2">
                     <label className="form-label">Host</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput2" placeholder={props.host}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput2" placeholder={props.row.host}/>
                   </div>
                   <div className="col-2">
                     <label className="form-label">Hostname</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput3" placeholder={props.hostname}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput3" placeholder={props.row.hostname}/>
                   </div>
                   <div className="col-2">
                     <label className="form-label">OS</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput4" placeholder={props.os}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput4" placeholder={props.row.os}/>
                   </div>
                   <div className="col-2">
                     <label className="form-label">IP</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput5" placeholder={props.ip}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput5" placeholder={props.row.ip}/>
                   </div>
                   <div className="col-2">
                     <label className="form-label">Disk</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput6" placeholder={props.disk}/>
+                    <input type="text" className="form-control" id="exampleFormControlInput6" placeholder={props.row.disk}/>
                   </div>
                 </div>
               </fieldset>
             </div>
             <div className="col-1">
-              <div><span type="button" className="badge glass0" onClick={()=> delPopUp()}><AiOutlineDelete/></span></div>
-              <div><span type="button" className="badge glass0" onClick={()=> editPopUp() }><FiEdit2/></span></div>
+              <div className='mt-1'><span type="button" className="badge glass0" onClick={()=> delPopUp()}><AiOutlineDelete/></span></div>
+              <div className='mt-2'><span type="button" className="badge glass0" onClick={()=> editPopUp()}><FiEdit2/></span></div>
             </div>
           </div>
           <fieldset disabled>
             <div className="row mb-3">
               <div className="col-2">
                 <label className="form-label">Datastore</label>
-                <input type="text" className="form-control" id="exampleFormControlInput7" placeholder={props.datastore}/>
+                <input type="text" className="form-control" id="exampleFormControlInput7" placeholder={props.row.datastore}/>
               </div>
               <div className="col-2">
                 <label className="form-label">RAM</label>
-                <input type="text" className="form-control" id="exampleFormControlInput8" placeholder={props.ram}/>
+                <input type="text" className="form-control" id="exampleFormControlInput8" placeholder={props.row.ram}/>
               </div>
               <div className="col-2">
                 <label className="form-label">Cores</label>
-                <input type="text" className="form-control" id="exampleFormControlInput9" placeholder={props.cores}/>
+                <input type="text" className="form-control" id="exampleFormControlInput9" placeholder={props.row.cores}/>
               </div>
               <div className="col-2">
                 <label className="form-label">VLAN</label>
-                <input type="text" className="form-control" id="exampleFormControlInput10" placeholder={props.vlan}/>
+                <input type="text" className="form-control" id="exampleFormControlInput10" placeholder={props.row.vlan}/>
               </div>
               <div className="col-2">
                 <label className="form-label">SW</label>
-                <input type="text" className="form-control" id="exampleFormControlInput11" placeholder={props.sw}/>
+                <input type="text" className="form-control" id="exampleFormControlInput11" placeholder={props.row.sw}/>
               </div>
               <div className="col-2">
                 <label className="form-label">Physical Port</label>
-                <input type="text" className="form-control" id="exampleFormControlInput12" placeholder={props.physPort}/>
+                <input type="text" className="form-control" id="exampleFormControlInput12" placeholder={props.row.physical_port}/>
               </div>
             </div>
           </fieldset>
