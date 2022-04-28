@@ -1,7 +1,6 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
 import PastLogCard from './pastLogCard';
-import { Link } from "react-router-dom";
 import ConfirmDelModal from './confirmDelModal';
 import EditModal from './editModal';
 
@@ -20,7 +19,7 @@ function PastLogsPage() {
     },[]);
 
     const checkId = (card) => {
-        return card.id != cardSpotlight;
+        return card.id !== cardSpotlight;
     }
 
     const removeCard = () => {
@@ -31,7 +30,7 @@ function PastLogsPage() {
     const editCard = (idd,card) => {
         let result = cards;
         for (let index = 0; index < result.length; index++) {
-            if (result[index].id == idd){
+            if (result[index].id === idd){
                 result[index] = card;
                 break;
             }

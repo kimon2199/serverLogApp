@@ -26,3 +26,7 @@
   letter-spacing: 0.1ch;
   text-transform: uppercase;
 }
+
+.nav-font {
+  color: rgb(47, 121, 231);
+}

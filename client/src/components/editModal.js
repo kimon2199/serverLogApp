@@ -23,7 +23,7 @@ function EditModal(props) {
         })
         .then(res => res.json())
         .then((data) => {
-            if (data.affectedRows == 1){
+            if (data.affectedRows === 1){
                 console.log("Successfull edit");
                 props.editCard(props.card, {  id: props.card,
                     server_type: type,

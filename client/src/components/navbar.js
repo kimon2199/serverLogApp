@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg glass0" style={{borderRadius: '0px'}}>
         <div className="container-fluid">
-            <a className="navbar-brand"  >Navbar</a>
+            <div className="navbar-brand nav-font"  >Navbar</div>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -20,14 +20,14 @@ function Navbar() {
                     <Link className="nav-link" to="/logs">Past Logs</Link>
                 </li>
                 <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle"   id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className="nav-link dropdown-toggle"   id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
-                </a>
+                </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item">Action</a></li>
-                    <li><a className="dropdown-item">Another action</a></li>
+                    <li><div className="dropdown-item">Action</div></li>
+                    <li><div className="dropdown-item">Another action</div></li>
                     <li><hr className="dropdown-divider"/></li>
-                    <li><a className="dropdown-item">Something else here</a></li>
+                    <li><div className="dropdown-item">Something else here</div></li>
                 </ul>
                 </li>
             </ul>
