@@ -1,10 +1,11 @@
 import '../App.css';
 import { useState, useEffect } from 'react';
 import InsertionCard from '../components/insertionCard';
-import Navbar from '../components/navbar';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function InsertPage() {
+
+  let navigate = useNavigate();
 
   const [type, setType] = useState(['BM'])
   const [host, setHost] = useState([''])
@@ -39,7 +40,11 @@ function InsertPage() {
           })
           })
           .then(response => response.json())
-          .then((data) => {console.log(data)})
+          .then((data) => {
+            console.log(665);
+            console.log(data);
+            navigate("../logs", {replace:true});
+          })
     }
   }
 

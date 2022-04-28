@@ -16,15 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-
-// app.get('/', (req, res) =>{
-//     const sqlInsert = "INSERT INTO server_logs (server_type) VALUES ('inception3')";
-//     db.query(sqlInsert, (err, result)=>{
-//         res.send('hello worldj');
-//     });
-// });
-
 app.post('/api/insert', (req,res)=>{
     const type = req.body.type;
     const host = req.body.host;
@@ -42,6 +33,7 @@ app.post('/api/insert', (req,res)=>{
     const sqlInsert = "INSERT INTO server_logs (server_type,host,hostname,os,ip,disk,datastore,ram,cores,vlan,sw,physical_port) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     db.query(sqlInsert, [type,host,hostname,os,ip,disk,datastore,ram,cores,vlan,sw,physPort], (err, result)=>{
         console.log('backend received log to insert');
+        res.send(result);
     });
 });
 
