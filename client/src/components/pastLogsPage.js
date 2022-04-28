@@ -55,6 +55,7 @@ function PastLogsPage() {
     return (
         <div className="container">
             {cardList}
+            <div className='pt-5'/>
             <ConfirmDelModal show={delModalShow} onHide={() => setDelModalShow(false)} card={cardSpotlight} removeCard={removeCard}/>
             <EditModal show={editModalShow} onHide={() => setEditModalShow(false)} card={cardSpotlight} row={wholeCard} editCard={editCard}/>
         </div>

@@ -12,12 +12,7 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<InsertPage/>}>
-          {/* <Route index element={<Home />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
-        </Route>
+        <Route path="/" element={<InsertPage/>}/>
         <Route path="/logs" element={<PastLogsPage/>}/>
       </Routes>
     </BrowserRouter>
