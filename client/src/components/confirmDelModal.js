@@ -10,7 +10,7 @@ function ConfirmDelModal(props) {
             .then((data) => {
                 if (data.affectedRows == 1){
                     console.log("Successfull deletion");
-                    props.removeCard(props.card);
+                    props.removeCard();
                     props.onHide();
                 }
             })

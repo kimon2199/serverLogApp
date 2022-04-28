@@ -1,7 +1,8 @@
 import '../App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import InsertionCard from '../components/insertionCard';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import * as XLSX from 'xlsx';
 
 function InsertPage() {
 
@@ -19,6 +20,68 @@ function InsertPage() {
   const [vlan, setVlan] = useState([''])
   const [sw, setSw] = useState([''])
   const [physPort, setPhysPort] = useState([''])
+  const [selectedFile, setSelectedFile] = useState(null)
+  
+  const onFileChange = event => {
+    setSelectedFile(event.target.files[0]);
+  };
+  
+  const onFileUpload = () => {
+    console.log(selectedFile);
+    let xl2json = new ExcelToJSON();
+    xl2json.parseExcel(selectedFile);
+  };
+  
+  var ExcelToJSON = function() {
+
+    this.parseExcel = function(file) {
+        var reader = new FileReader();
+  
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {
+                type: 'binary'
+            });
+  
+            workbook.SheetNames.forEach(function(sheetName) {
+                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                submitLogExcel(XL_row_object);
+            });
+        };
+  
+        reader.onerror = function(ex) {
+            console.log(ex);
+        };
+  
+        reader.readAsBinaryString(file);
+    };
+  };
+
+  const submitLogExcel = rows => {
+    for (let i = 0; i < rows.length; i++) { 
+      fetch('http://localhost:3001/api/insert', {
+              method: 'post', 
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({  type: rows[i].server_type,
+                                      host: rows[i].host,
+                                      hostname: rows[i].hostname,
+                                      os: rows[i].os,
+                                      ip: rows[i].ip,
+                                      disk: rows[i].disk,
+                                      datastore: rows[i].datastore,
+                                      ram: rows[i].ram,
+                                      cores: rows[i].cores,
+                                      vlan: rows[i].vlan,
+                                      sw: rows[i].sw,
+                                      physPort: rows[i].physical_port
+          })
+          })
+          .then(response => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+    }
+  }
 
   const submitLog = () => {
     for (let index = 0; index < host.length; index++) {
@@ -41,7 +104,6 @@ function InsertPage() {
           })
           .then(response => response.json())
           .then((data) => {
-            console.log(665);
             console.log(data);
             navigate("../logs", {replace:true});
           })
@@ -61,7 +123,6 @@ function InsertPage() {
     setVlan(vlan => [...vlan,'']);
     setSw(sw => [...sw,'']);
     setPhysPort(physPort => [...physPort,'']);
-    console.log(99);
   }
   
   const delCard = () => {
@@ -109,6 +170,10 @@ function InsertPage() {
         <div className='row'>
           <div className='col'>
             <button type="button" className="btn btn-primary" onClick={()=>{submitLog()}}>Submit</button>
+            <div>
+                <input type="file" onChange={onFileChange} />
+                <button onClick={onFileUpload}>Upload!</button>
+            </div>
           </div>
         </div>
         <div className='pb-5'/>
