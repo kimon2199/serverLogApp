@@ -3,6 +3,8 @@ import { useState } from 'react';
 import InsertionCard from '../components/insertionCard';
 import { useNavigate } from "react-router-dom";
 import * as XLSX from 'xlsx';
+import { SiMicrosoftexcel } from "react-icons/si";
+import ExcelModal from "./excelModal.js";
 
 function InsertPage() {
 
@@ -21,6 +23,8 @@ function InsertPage() {
   const [sw, setSw] = useState([''])
   const [physPort, setPhysPort] = useState([''])
   const [selectedFile, setSelectedFile] = useState(null)
+
+  const [excelModalShow, setExcelModalShow] = useState(false)
   
   const onFileChange = event => {
     setSelectedFile(event.target.files[0]);
@@ -154,8 +158,13 @@ function InsertPage() {
     <div>
       <div className='pt-5'/>
       <h5 className="card-title  mb-5 white-font">Server Management Web App</h5>
-      <h5 className="card-title mt-5 mb-5 white-font">to be {type.length}</h5>
       <div className="container">
+
+        <div className='row'>
+          <div className='col'>
+            <span type="button" className="badge glass0 flex" style={{float:'right'}} onClick={()=>{setExcelModalShow(true)}}><SiMicrosoftexcel/></span>
+          </div>
+        </div>
 
         {cardList} 
 
@@ -166,18 +175,18 @@ function InsertPage() {
           <div className='col-1'>
             {(type.length > 1) && (<span type="button" className="badge glass0" onClick={()=>{delCard()}}>-</span>)}
           </div>
+          <div className='col-8'>
+            <h5 className="white-font glass0 badge">Records to be added: {type.length}</h5>
+          </div>
         </div>
         <div className='row'>
           <div className='col'>
             <button type="button" className="btn btn-primary" onClick={()=>{submitLog()}}>Submit</button>
-            <div>
-                <input type="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>Upload!</button>
-            </div>
           </div>
         </div>
         <div className='pb-5'/>
       </div>
+      <ExcelModal show={excelModalShow} onHide={() => setExcelModalShow(false)} onFileChange={onFileChange} onFileUpload={onFileUpload}/>
     </div>
   );
 }
