@@ -162,7 +162,7 @@ function InsertPage() {
 
         <div className='row'>
           <div className='col'>
-            <span type="button" className="badge glass0 flex" style={{float:'right'}} onClick={()=>{setExcelModalShow(true)}}><SiMicrosoftexcel/></span>
+            <span type="button" className="badge glass0 flex" style={{float:'right'}} onClick={()=>{setExcelModalShow(true)}}>Import <SiMicrosoftexcel/></span>
           </div>
         </div>
 
