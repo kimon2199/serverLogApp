@@ -61,9 +61,9 @@ function InsertPage() {
     };
   };
 
-  const submitLogExcel = rows => {
-    for (let i = 0; i < rows.length; i++) { 
-      fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
+  const submitLogExcel = async rows => {
+    for (let i = 0; i < rows.length; i++) {
+      await fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
               method: 'post', 
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({  type: rows[i].server_type,
@@ -87,9 +87,9 @@ function InsertPage() {
     }
   }
 
-  const submitLog = () => {
+  const submitLog = async () => {
     for (let index = 0; index < host.length; index++) {
-      fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
+      await fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
               method: 'post', 
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({  type: type[index],
