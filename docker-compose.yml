@@ -1,0 +1,66 @@
+version: "3.2"
+services:
+  nodejs:
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    networks:
+      - frontend
+      - backend
+    environment:
+      - MYSQL_HOST=serverLog-mysql-app
+      - MYSQL_USER=serverLoguser
+      - MYSQL_PASS=serverLogpass
+      - MYSQL_DB=server_logs_db
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - "30001:8005"
+    container_name: serverLog-nodejs-app
+
+  mysql:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=serverLoguser
+      - MYSQL_PASSWORD=serverLogpass
+      - MYSQL_DATABASE=server_logs_db
+    volumes:
+      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+    container_name: serverLog-mysql-app
+
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    ports:
+      - "30003:3000"
+    container_name: serverLog-react-app
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:4.7
+  #   depends_on:
+  #     - mysql
+  #   networks:
+  #     - backend
+  #   ports:
+  #     - "30002:80"
+  #   environment:
+  #     - PMA_HOST=serverLog-mysql-app
+  #     - PMA_PORT= 3306
+  #   volumes:
+  #     - /sessions
+  #   container_name: serverLog-phpmyadmin-app00
+
+networks:
+  frontend:
+  backend:

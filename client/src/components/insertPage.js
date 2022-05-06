@@ -63,7 +63,7 @@ function InsertPage() {
 
   const submitLogExcel = rows => {
     for (let i = 0; i < rows.length; i++) { 
-      fetch('http://localhost:3001/api/insert', {
+      fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
               method: 'post', 
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({  type: rows[i].server_type,
@@ -89,7 +89,7 @@ function InsertPage() {
 
   const submitLog = () => {
     for (let index = 0; index < host.length; index++) {
-      fetch('http://localhost:3001/api/insert', {
+      fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/insert', {
               method: 'post', 
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({  type: type[index],

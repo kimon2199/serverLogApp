@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 function EditModal(props) {
 
     const editRow = () => {
-        fetch('http://localhost:3001/api/edit/' + props.row.id, {
+        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/edit/' + props.row.id, {
             method: 'put', 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({  type: type,

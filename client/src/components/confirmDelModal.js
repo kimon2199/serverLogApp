@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap'
 function ConfirmDelModal(props) {
 
     const deleteRow = () => {
-        fetch('http://localhost:3001/api/delete/' + props.card, {
+        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/delete/' + props.card, {
             method: 'delete'
         })
             .then(res => res.json())

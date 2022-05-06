@@ -8,7 +8,7 @@ import EditModal from './editModal';
 function PastLogsPage() {
 
     useEffect(()=>{
-        fetch('http://localhost:3001/api/get', {
+        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get', {
                     method: 'get'
                 })
                     .then(res => res.json())

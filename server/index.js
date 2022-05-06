@@ -5,12 +5,14 @@ const app = express();
 const mysql = require('mysql');
 
 const db = mysql.createPool({
-    port: '3307',
-    host: 'localhost',
-    user: 'root',
-    password: '12345678',
-    database: 'server_logs_db'
+    host: process.env.MYSQL_HOST || 'localhost',
+    port: process.env.MYSQL_PORT || '3306',
+    user: process.env.MYSQL_USER || 'root',
+    password: process.env.MYSQL_PASS || 'root',
+    database: process.env.MYSQL_DB   || 'node_db'
 });
+
+const port = process.env.PORT || 8005;
 
 app.use(cors());
 app.use(express.json());
@@ -74,6 +76,6 @@ app.put('/api/edit/:id', (req,res) => {
     });
 })
 
-app.listen(3001, () =>{
-    console.log('runnig on port 3001');
+app.listen(port, function(){
+    console.log('Node listening on port ' + port);
 });
