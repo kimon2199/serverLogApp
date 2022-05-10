@@ -201,7 +201,7 @@ function InsertPage() {
         </div>
         <div className='row'>
           <div className='col'>
-            <button type="button" className="btn btn-primary" onClick={()=>{submitLog()}}>Submit</button>
+            <button type="button" className="btn btn-primary glass0" onClick={()=>{submitLog()}}>Submit</button>
           </div>
         </div>
         <div className='pb-5'/>
