@@ -3,8 +3,8 @@ import { Modal, Button } from 'react-bootstrap';
 function ExcelModal(props) {
 
     const upload = () => {
-        props.onFileUpload(); 
-        props.onHide();
+        let ret = props.onFileUpload(); 
+        console.log(ret);
     };
 
     return (
@@ -22,7 +22,11 @@ function ExcelModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <input type="file" onChange={props.onFileChange} />
+                        <div style={{color:(props.excelHeaderError && 'red') || 'black'}}>Make sure the headers of the first row are the following,
+                            in this order: [ server_type, host, hostname, os, ip, disk, datastore, ram, cores, vlan, sw, physical_port]
+                        </div>
+                        {props.excelFileTypeError && <div className='pt-4' style={{color:'red'}}>Error: File must be of type .xlsx</div>}
+                        <input className='pt-4' type="file" onChange={props.onFileChange} />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

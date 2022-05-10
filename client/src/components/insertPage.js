@@ -25,6 +25,8 @@ function InsertPage() {
   const [selectedFile, setSelectedFile] = useState(null)
 
   const [excelModalShow, setExcelModalShow] = useState(false)
+  const [excelHeaderError, setExcelHeaderError] = useState(false)
+  const [excelFileTypeError, setExcelFileTypeError] = useState(false)
   
   const onFileChange = event => {
     setSelectedFile(event.target.files[0]);
@@ -34,6 +36,7 @@ function InsertPage() {
     console.log(selectedFile);
     let xl2json = new ExcelToJSON();
     xl2json.parseExcel(selectedFile);
+    return !excelFileTypeError && !excelHeaderError;
   };
   
   var ExcelToJSON = function() {
@@ -42,15 +45,32 @@ function InsertPage() {
         var reader = new FileReader();
   
         reader.onload = function(e) {
-            var data = e.target.result;
+          var data = e.target.result;
+          try {
             var workbook = XLSX.read(data, {
-                type: 'binary'
+              type: 'binary'
             });
+          } catch(err) {
+            setExcelFileTypeError(true);
+            return;
+          }
+          setExcelFileTypeError(false);
   
-            workbook.SheetNames.forEach(function(sheetName) {
-                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                submitLogExcel(XL_row_object);
-            });
+          workbook.SheetNames.forEach(function(sheetName) {
+            var row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+            var headers = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 })[0];
+            var expectedHeaders = [ "server_type", "host", "hostname", "os", "ip", "disk", 
+              "datastore", "ram", "cores", "vlan", "sw", "physical_port"];
+            for (var i=0; i < headers.length && i < expectedHeaders.length; i++){
+              if (headers[i] !== expectedHeaders[i]){
+                setExcelHeaderError(true);
+                return;
+              }
+            }
+            submitLogExcel(row_object);
+            setExcelHeaderError(false);
+            setExcelModalShow(false);
+          });
         };
   
         reader.onerror = function(ex) {
@@ -186,7 +206,8 @@ function InsertPage() {
         </div>
         <div className='pb-5'/>
       </div>
-      <ExcelModal show={excelModalShow} onHide={() => setExcelModalShow(false)} onFileChange={onFileChange} onFileUpload={onFileUpload}/>
+      <ExcelModal show={excelModalShow} onHide={() => setExcelModalShow(false)} onFileChange={onFileChange} 
+        onFileUpload={onFileUpload} excelHeaderError={excelHeaderError} excelFileTypeError={excelFileTypeError}/>
     </div>
   );
 }
