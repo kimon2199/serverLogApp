@@ -22,14 +22,10 @@ function PastLogsPage(props) {
     const [delModalShow, setDelModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [cardSpotlight, setCardSpotlight] = useState(0);
-    const [cards,setCards] = useState([{server_type: '1', host: '2', 
-    hostname: '3', os: '4', ip: '5', disk: '6', datastore: '7', ram: '8', 
-    cores: '9', vlan: '10', sw: '11', physical_port: '12'},{server_type: '12', host: '11', 
-    hostname: '10', os: '9', ip: '8', disk: '7', datastore: '6', ram: '5', 
-    cores: '4', vlan: '3', sw: '2', physical_port: '1'}])
+    const [cards,setCards] = useState([]);
     const [wholeCard,setWholeCard] = useState({server_type: '', host: '', 
         hostname: '', os: '', ip: '', disk: '', datastore: '', ram: '', 
-        cores: '', vlan: '', sw: '', physical_port: ''})
+        cores: '', vlan: '', sw: '', physical_port: ''});
 
     const checkId = (card) => {
         return card.id !== cardSpotlight;
@@ -67,7 +63,7 @@ function PastLogsPage(props) {
             </div>
             {cardList}
             <div className='pt-5'/>
-            <ConfirmDelModal show={delModalShow} onHide={() => setDelModalShow(false)} card={cardSpotlight} removeCard={removeCard}/>
+            <ConfirmDelModal show={delModalShow} onHide={() => setDelModalShow(false)} card={cardSpotlight} removeCard={() => removeCard()}/>
             <EditModal show={editModalShow} onHide={() => setEditModalShow(false)} card={cardSpotlight} row={wholeCard} editCard={editCard}/>
         </div>
     );

@@ -2,6 +2,8 @@ import { Modal, Button } from 'react-bootstrap'
 
 function ConfirmDelModal(props) {
 
+    const {removeCard, ...others} = props;
+
     const deleteRow = () => {
         fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/delete/' + props.card, {
             method: 'delete'
@@ -10,8 +12,8 @@ function ConfirmDelModal(props) {
             .then((data) => {
                 if (data.affectedRows === 1){
                     console.log("Successfull deletion");
-                    props.removeCard();
-                    props.onHide();
+                    removeCard();
+                    others.onHide();
                 }
             })
     }
@@ -19,7 +21,7 @@ function ConfirmDelModal(props) {
     return (
         <div>
             <Modal
-                {...props}
+                {...others}
                 size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -33,7 +35,7 @@ function ConfirmDelModal(props) {
                     Are you sure you want to delete?
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="mybtn" variant="outline-warning" onClick={props.onHide}>Cancel</Button>
+                    <Button className="mybtn" variant="outline-warning" onClick={others.onHide}>Cancel</Button>
                     <Button className="mybtn" variant="danger" onClick={() => deleteRow()}>Delete</Button>
                 </Modal.Footer>
             </Modal>

@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 
 function EditModal(props) {
 
+    const {editCard, row, ...others} = props;
+
     const editRow = () => {
-        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/edit/' + props.row.id, {
+        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/edit/' + row.id, {
             method: 'put', 
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({  type: type,
@@ -25,7 +27,7 @@ function EditModal(props) {
         .then((data) => {
             if (data.affectedRows === 1){
                 console.log("Successfull edit");
-                props.editCard(props.card, {  id: props.card,
+                editCard(props.card, {  id: props.card,
                     server_type: type,
                     host: host,
                     hostname: hostname,
@@ -43,38 +45,38 @@ function EditModal(props) {
         })
     }
     
-    const [type, setType] = useState(props.row.server_type)
-    const [host,setHost] = useState(props.row.host)
-    const [hostname, setHostname] = useState(props.row.host)
-    const [os, setOs] = useState(props.row.os)
-    const [ip, setIp] = useState(props.row.ip)
-    const [disk, setDisk] = useState(props.row.disk)
-    const [datastore, setDatastore] = useState(props.row.datastore)
-    const [ram, setRam] = useState(props.row.ram)
-    const [cores, setCores] = useState(props.row.cores)
-    const [vlan, setVlan] = useState(props.row.vlan)
-    const [sw, setSw] = useState(props.row.sw)
-    const [physPort, setPhysPort] = useState(props.row.physical_port)
+    const [type, setType] = useState(row.server_type)
+    const [host,setHost] = useState(row.host)
+    const [hostname, setHostname] = useState(row.host)
+    const [os, setOs] = useState(row.os)
+    const [ip, setIp] = useState(row.ip)
+    const [disk, setDisk] = useState(row.disk)
+    const [datastore, setDatastore] = useState(row.datastore)
+    const [ram, setRam] = useState(row.ram)
+    const [cores, setCores] = useState(row.cores)
+    const [vlan, setVlan] = useState(row.vlan)
+    const [sw, setSw] = useState(row.sw)
+    const [physPort, setPhysPort] = useState(row.physical_port)
     
     useEffect(()=>{
-        setType(props.row.server_type);
-        setHost(props.row.host);
-        setHostname(props.row.hostname);
-        setOs(props.row.os);
-        setIp(props.row.ip);
-        setDisk(props.row.disk);
-        setDatastore(props.row.datastore);
-        setRam(props.row.ram);
-        setCores(props.row.cores);
-        setVlan(props.row.vlan);
-        setSw(props.row.sw);
-        setPhysPort(props.row.physical_port);
-    },[props.row])
+        setType(row.server_type);
+        setHost(row.host);
+        setHostname(row.hostname);
+        setOs(row.os);
+        setIp(row.ip);
+        setDisk(row.disk);
+        setDatastore(row.datastore);
+        setRam(row.ram);
+        setCores(row.cores);
+        setVlan(row.vlan);
+        setSw(row.sw);
+        setPhysPort(row.physical_port);
+    },[row])
     
     return (
         <div>
             <Modal
-                {...props}
+                {...others}
                 size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -143,7 +145,7 @@ function EditModal(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="mybtn" variant="outline-danger" onClick={props.onHide}>Cancel</Button>
+                    <Button className="mybtn" variant="outline-danger" onClick={others.onHide}>Cancel</Button>
                     <Button className="mybtn" variant="primary" onClick={() => editRow()}>Make Changes</Button>
                 </Modal.Footer>
             </Modal>

@@ -28,12 +28,11 @@ function InsertPage() {
   const [excelHeaderError, setExcelHeaderError] = useState(false)
   const [excelFileTypeError, setExcelFileTypeError] = useState(false)
   
-  const onFileChange = event => {
+  const whenFileChange = event => {
     setSelectedFile(event.target.files[0]);
   };
   
   const onFileUpload = () => {
-    console.log(selectedFile);
     let xl2json = new ExcelToJSON();
     xl2json.parseExcel(selectedFile);
     return !excelFileTypeError && !excelHeaderError;
@@ -206,7 +205,7 @@ function InsertPage() {
         </div>
         <div className='pb-5'/>
       </div>
-      <ExcelModal show={excelModalShow} onHide={() => setExcelModalShow(false)} onFileChange={onFileChange} 
+      <ExcelModal show={excelModalShow} onHide={() => setExcelModalShow(false)} whenFileChange={(e) => whenFileChange(e)} 
         onFileUpload={onFileUpload} excelHeaderError={excelHeaderError} excelFileTypeError={excelFileTypeError}/>
     </div>
   );

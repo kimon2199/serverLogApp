@@ -2,15 +2,17 @@ import { Modal, Button } from 'react-bootstrap';
 
 function ExcelModal(props) {
 
+    const {onFileUpload, whenFileChange, excelFileTypeError, excelHeaderError, ...others} = props;
+
     const upload = () => {
-        let ret = props.onFileUpload(); 
+        let ret = onFileUpload(); 
         console.log(ret);
     };
 
     return (
         <div>
             <Modal
-                {...props}
+                {...others}
                 size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -22,11 +24,11 @@ function ExcelModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <div style={{color:(props.excelHeaderError && 'red') || 'black'}}>Make sure the headers of the first row are the following,
+                        <div style={{color:(excelHeaderError && 'red') || 'black'}}>Make sure the headers of the first row are the following,
                             in this order: [ server_type, host, hostname, os, ip, disk, datastore, ram, cores, vlan, sw, physical_port]
                         </div>
-                        {props.excelFileTypeError && <div className='pt-4' style={{color:'red'}}>Error: File must be of type .xlsx</div>}
-                        <input className='pt-4' type="file" onChange={props.onFileChange} />
+                        {excelFileTypeError && <div className='pt-4' style={{color:'red'}}>Error: File must be of type .xlsx</div>}
+                        <input className='pt-4' type="file" onChange={(e) => whenFileChange(e)} />
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

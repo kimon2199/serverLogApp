@@ -17,7 +17,7 @@ function PastLogCard(props) {
 
     return (
       <div>
-        {props.row[props.searchKey].includes(props.searchTerm) &&
+        {((props.row[props.searchKey] && props.row[props.searchKey].includes(props.searchTerm)) || props.searchTerm === "") &&
           <div className="row mb-3 mt-5 bg">
             <div className="glass0 white-font">
               <div className="row mb-1 mt-1">
