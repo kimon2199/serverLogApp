@@ -47,7 +47,7 @@ function EditModal(props) {
     
     const [type, setType] = useState(row.server_type)
     const [host,setHost] = useState(row.host)
-    const [hostname, setHostname] = useState(row.host)
+    const [hostname, setHostname] = useState(row.hostname)
     const [os, setOs] = useState(row.os)
     const [ip, setIp] = useState(row.ip)
     const [disk, setDisk] = useState(row.disk)
