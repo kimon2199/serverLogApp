@@ -37,8 +37,8 @@ function ExcelModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <div style={{color:(excelHeaderError && 'red') || 'black'}}>{"Make sure the headers of the first row are the following,\
-                            in this order: " + sql_head_string}
+                        <div style={{color:(excelHeaderError && 'red') || 'black'}}>{`Make sure the headers of the first row are the following,
+                            in this order: ` + sql_head_string}
                         </div>
                         {excelFileTypeError && <div className='pt-4' style={{color:'red'}}>Error: File must be of type .xlsx</div>}
                         <input className='pt-4' type="file" onChange={(e) => whenFileChange(e)} />
