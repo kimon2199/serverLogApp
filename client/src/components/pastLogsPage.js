@@ -4,6 +4,7 @@ import PastLogCard from './pastLogCard';
 import ConfirmDelModal from './confirmDelModal';
 import EditModal from './editModal';
 import ExcelExport from './excelExport';
+import { emptyRow } from '../commonVariablesReact';
 
 
 function PastLogsPage(props) {
@@ -23,9 +24,7 @@ function PastLogsPage(props) {
     const [editModalShow, setEditModalShow] = useState(false);
     const [cardSpotlight, setCardSpotlight] = useState(0);
     const [cards,setCards] = useState([]);
-    const [wholeCard,setWholeCard] = useState({server_type: '', host: '', 
-        hostname: '', os: '', ip: '', disk: '', datastore: '', ram: '', 
-        cores: '', vlan: '', sw: '', physical_port: ''});
+    const [wholeCard,setWholeCard] = useState({...emptyRow});
 
     const checkId = (card) => {
         return card.id !== cardSpotlight;

@@ -1,9 +1,11 @@
 import '../App.css';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import { sql_head, titles } from '../commonVariablesReact';
 
 
 function Navbar(props) {
+
   const [dropdown, setDropdown] = useState('Server Type');
 
   const changeField = (f1,f2) => {
@@ -33,18 +35,9 @@ function Navbar(props) {
                     {dropdown}
                 </div>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li onClick={() => changeField('server_type','Server Type')}><div className="dropdown-item">Server Type</div></li>
-                    <li onClick={() => changeField('host','Host')}><div className="dropdown-item">Host</div></li>
-                    <li onClick={() => changeField('hostname','Hostname')}><div className="dropdown-item">Hostname</div></li>
-                    <li onClick={() => changeField('os','OS')}><div className="dropdown-item">OS</div></li>
-                    <li onClick={() => changeField('ip','IP')}><div className="dropdown-item">IP</div></li>
-                    <li onClick={() => changeField('disk','Disk')}><div className="dropdown-item">Disk</div></li>
-                    <li onClick={() => changeField('datastore','Datastore')}><div className="dropdown-item">Datastore</div></li>
-                    <li onClick={() => changeField('ram','Ram')}><div className="dropdown-item">Ram</div></li>
-                    <li onClick={() => changeField('cores','Cores')}><div className="dropdown-item">Cores</div></li>
-                    <li onClick={() => changeField('vlan','VLAN')}><div className="dropdown-item">VLAN</div></li>
-                    <li onClick={() => changeField('sw','SW')}><div className="dropdown-item">SW</div></li>
-                    <li onClick={() => changeField('physical_port','Physical Port')}><div className="dropdown-item">Physical Port</div></li>
+                    { titles.slice(0,titles.length).map((item,index)=>{
+                        return (<li key={"dr"+index} onClick={() => changeField(sql_head[index],item)}><div className="dropdown-item">{item}</div></li>);})
+                    }
                 </ul>
                 </div>
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"  onChange={(e)=> props.setSearchTerm(e.target.value)}/>
