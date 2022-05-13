@@ -28,6 +28,6 @@ Note: If the docker containers are left in a running state when machine is shut 
 
 In order to add or remove a field of the entries three files need to be edited:
 
-    * `./setup.sql`
-    * `./client/commonVariablesReact.js`
-    * `./server/commonVariablesNode.js`
+- `./setup.sql`
+- `./client/commonVariablesReact.js`
+- `./server/commonVariablesNode.js`

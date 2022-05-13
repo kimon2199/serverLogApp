@@ -4,13 +4,14 @@ import PastLogCard from './pastLogCard';
 import ConfirmDelModal from './confirmDelModal';
 import EditModal from './editModal';
 import ExcelExport from './excelExport';
+import CountBox from './countBox';
 import { emptyRow } from '../commonVariablesReact';
 
 
 function PastLogsPage(props) {
 
     useEffect(()=>{
-        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get', {
+        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get/all', {
                     method: 'get'
                 })
                     .then(res => res.json())
@@ -56,6 +57,9 @@ function PastLogsPage(props) {
     return (
         <div className="container">
             <div className="row pt-5">
+                <div className='col'>
+                    <CountBox showDel={delModalShow}/>
+                </div>
                 <div className='col'>
                     {cards.length !== 0 && (<ExcelExport csvData={cards} fileName="text-excel-doc" />)}
                 </div>

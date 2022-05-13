@@ -24,7 +24,7 @@ const ExcelExport = ({ csvData, fileName }) => {
   };
 
   return (
-    <span type="button" className="badge glass0 flex" style={{float:'right'}} onClick={()=> exportToCSV(csvData, fileName)}>
+    <span type="button" className="badge glass0 flex" style={{float:'right', height:'23px'}} onClick={()=> exportToCSV(csvData, fileName)}>
         Export <SiMicrosoftexcel/>
     </span>
   );

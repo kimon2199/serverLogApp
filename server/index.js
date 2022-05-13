@@ -1,10 +1,11 @@
-import { sql_head } from './commonVariablesNode';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
+
+const cv = require('./commonVariablesNode');
+const sql_head = cv.sql_head;
 
 let sql_fields = "(";
 let sql_question_marks = "(";
@@ -41,9 +42,16 @@ app.post('/api/insert', (req,res)=>{
     });
 });
 
-app.get('/api/get', (req,res)=>{
+app.get('/api/get/all', (req,res)=>{
     const sqlSelect = "SELECT * FROM server_logs";
     db.query(sqlSelect, (err, result)=>{
+        res.send(result);
+    });
+})
+
+app.get('/api/get/count', (req,res)=>{
+    const sqlCount = "SELECT COUNT(*) FROM server_logs";
+    db.query(sqlCount, (err, result)=>{
         res.send(result);
     });
 })
