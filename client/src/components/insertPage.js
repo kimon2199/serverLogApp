@@ -92,9 +92,9 @@ function InsertPage() {
           .then(response => response.json())
           .then((data) => {
             console.log(data);
-            navigate("../logs", {replace:true});
           })
-    }
+        }
+    navigate("../logs", {replace:true});
   }
 
   const addCard = () => {

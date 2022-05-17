@@ -42,8 +42,24 @@ app.post('/api/insert', (req,res)=>{
     });
 });
 
-app.get('/api/get/all', (req,res)=>{
-    const sqlSelect = "SELECT * FROM server_logs";
+app.get('/api/get/all/:numberOfRows/:itemsPerPage/:pageNumber', (req,res)=>{
+    const numberOfRows = req.params.numberOfRows;
+    const itemsPerPage = req.params.itemsPerPage;
+    const pageNumber = req.params.pageNumber;
+
+    const numberOfPages = Math.ceil(numberOfRows / itemsPerPage);
+    const firstLimit = (numberOfPages - pageNumber)*itemsPerPage + (numberOfRows % itemsPerPage || itemsPerPage);
+
+    const sqlSelect = `SELECT * 
+                       FROM (SELECT *
+                             FROM (SELECT * 
+                                   FROM server_logs 
+                                   LIMIT ${firstLimit}
+                                  ) AS T 
+                             ORDER BY id DESC 
+                             LIMIT ${itemsPerPage}
+                            ) AS TT 
+                       ORDER BY id ASC`;
     db.query(sqlSelect, (err, result)=>{
         res.send(result);
     });

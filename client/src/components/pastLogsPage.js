@@ -5,22 +5,41 @@ import ConfirmDelModal from './confirmDelModal';
 import EditModal from './editModal';
 import ExcelExport from './excelExport';
 import CountBox from './countBox';
+import PageSelector from './pageSelector'
 import { emptyRow } from '../commonVariablesReact';
 
 
 function PastLogsPage(props) {
 
-    useEffect(()=>{
-        fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get/all', {
-                    method: 'get'
-                })
-                    .then(res => res.json())
-                    .then((data) => {
-                    console.log(data);
-                    setCards(data.slice().reverse());
-                    })
-    },[]);
+    const itemsPerPage = 50;
 
+    useEffect(() => {
+        async function fetchRows() {
+            let nor = 0;
+            await fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get/count', {
+                method: 'get'
+            })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                nor = data[0]["COUNT(*)"];
+                setNumberOfRows(nor);
+            })
+            
+            fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get/all/' + nor + '/' + itemsPerPage + '/' + pageNumber, {
+                method: 'get'
+            })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                setCards(data.slice().reverse());
+            })
+        }
+        fetchRows();
+    },[pageNumber]);
+    
+    const [pageNumber, setPageNumber] = useState(1);
+    const [numberOfRows, setNumberOfRows] = useState(' ')
     const [delModalShow, setDelModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [cardSpotlight, setCardSpotlight] = useState(0);
@@ -65,6 +84,7 @@ function PastLogsPage(props) {
                 </div>
             </div>
             {cardList}
+            <PageSelector setPageNumber={setPageNumber} numberOfRows={numberOfRows} itemsPerPage={itemsPerPage}/>
             <div className='pt-5'/>
             <ConfirmDelModal show={delModalShow} onHide={() => setDelModalShow(false)} card={cardSpotlight} removeCard={() => removeCard()}/>
             <EditModal show={editModalShow} onHide={() => setEditModalShow(false)} card={cardSpotlight} row={wholeCard} editCard={editCard}/>

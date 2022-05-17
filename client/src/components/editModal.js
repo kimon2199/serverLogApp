@@ -55,7 +55,6 @@ function EditModal(props) {
                             return (
                                 <div className='col-4' key={'editField'+index}>
                                     <label className="form-label">{item}:</label>
-                                    {/* <input type="text" className="form-control" value={myState[sql_head[index]]} onChange={e => changeStateWhenTyping(e.target.value,sql_head[index])}/> */}
                                     <input type="text" className="form-control" value={myState[sql_head[index]]} onChange={e => setMyState(myState => {return { ...myState, [sql_head[index]]: e.target.value }})}/>
 
                                     
