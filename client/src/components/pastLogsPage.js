@@ -12,6 +12,8 @@ import { emptyRow } from '../commonVariablesReact';
 function PastLogsPage(props) {
 
     const itemsPerPage = 50;
+    const [pageNumber, setPageNumber] = useState(1);
+    const [numberOfRows, setNumberOfRows] = useState(' ')
 
     useEffect(() => {
         async function fetchRows() {
@@ -25,7 +27,7 @@ function PastLogsPage(props) {
                 nor = data[0]["COUNT(*)"];
                 setNumberOfRows(nor);
             })
-            
+
             fetch('http://localhost:' + process.env.REACT_APP_NODE_PORT + '/api/get/all/' + nor + '/' + itemsPerPage + '/' + pageNumber, {
                 method: 'get'
             })
@@ -38,8 +40,6 @@ function PastLogsPage(props) {
         fetchRows();
     },[pageNumber]);
     
-    const [pageNumber, setPageNumber] = useState(1);
-    const [numberOfRows, setNumberOfRows] = useState(' ')
     const [delModalShow, setDelModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [cardSpotlight, setCardSpotlight] = useState(0);
