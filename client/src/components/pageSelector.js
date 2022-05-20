@@ -10,7 +10,7 @@ function PageSelector(props) {
             {range(ceiling(props.numberOfRows / props.itemsPerPage)).map((item,index)=>{
                 return (
                     <div style={{display: 'inline-block'}} key={'page'+index}>
-                        <span className="badge glass0 flex" onClick={() => props.setPageNumber(item)}>{item}</span>
+                        <span className="badge glass0 flex mx-1" type="button" onClick={() => props.setPageNumber(item)}>{item}</span>
                     </div>
                 )
             })}

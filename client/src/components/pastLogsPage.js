@@ -6,14 +6,15 @@ import EditModal from './editModal';
 import ExcelExport from './excelExport';
 import CountBox from './countBox';
 import PageSelector from './pageSelector'
+import ItemNumberDropdown from './itemNumberDropdown';
 import { emptyRow } from '../commonVariablesReact';
 
 
 function PastLogsPage(props) {
 
-    const itemsPerPage = 50;
+    const [itemsPerPage, setItemsPerPage] = useState(20);
     const [pageNumber, setPageNumber] = useState(1);
-    const [numberOfRows, setNumberOfRows] = useState(' ')
+    const [numberOfRows, setNumberOfRows] = useState(' ');
 
     useEffect(() => {
         async function fetchRows() {
@@ -38,7 +39,7 @@ function PastLogsPage(props) {
             })
         }
         fetchRows();
-    },[pageNumber]);
+    },[pageNumber, itemsPerPage]);
     
     const [delModalShow, setDelModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
@@ -76,15 +77,20 @@ function PastLogsPage(props) {
     return (
         <div className="container">
             <div className="row pt-5">
-                <div className='col'>
+                <div className="col-1">
                     <CountBox showDel={delModalShow}/>
                 </div>
-                <div className='col'>
+                <div class="col-9">
+                    {cards.length !== 0 && <ItemNumberDropdown itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage}/>}
+                </div>
+                <div className="col-2">
                     {cards.length !== 0 && (<ExcelExport csvData={cards} fileName="text-excel-doc" />)}
                 </div>
             </div>
             {cardList}
-            <PageSelector setPageNumber={setPageNumber} numberOfRows={numberOfRows} itemsPerPage={itemsPerPage}/>
+            <div className='row pt-3'>
+                <PageSelector setPageNumber={setPageNumber} numberOfRows={numberOfRows} itemsPerPage={itemsPerPage}/>
+            </div>
             <div className='pt-5'/>
             <ConfirmDelModal show={delModalShow} onHide={() => setDelModalShow(false)} card={cardSpotlight} removeCard={() => removeCard()}/>
             <EditModal show={editModalShow} onHide={() => setEditModalShow(false)} card={cardSpotlight} row={wholeCard} editCard={editCard}/>
